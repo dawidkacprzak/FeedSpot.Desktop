@@ -1,0 +1,46 @@
+*{
+    user-select: none;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#loading-logo
+{
+    width: 180px;
+    height: 180px;
+    margin: 5px;
+}
+
+#loading-please-wait
+{
+    width: 100%;
+    margin-left: 260px;
+}
+
+#loading-state{
+    text-transform: uppercase;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ddd, #fff, #ddd);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 3s linear infinite;
+    -webkit-background-clip: text;
+    margin-top: 10px;
+    -webkit-text-fill-color: #dddddd50;
+  }
+  
+  @keyframes animate {
+    0% {
+      background-position: -500%;
+    }
+    100% {
+      background-position: 500%;
+    }
+  }
