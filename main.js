@@ -8,13 +8,13 @@ function createWindow() {
     frame: false,
     hasShadow: false,
     alwaysOnTop: true,
-    resizable: false,
+    resizable: true,
     webPreferences: {
       nodeIntegration: true
     }
   });
   loadingWin.webContents.on("devtools-opened", () => {
-    win.webContents.closeDevTools();
+    //win.webContents.closeDevTools();
   });
     
   loadingWin.loadFile("./pages/Loading.html");
