@@ -1,9 +1,13 @@
 const { ipcRenderer, ipcMain } = require("electron");
 const LCUConnector = require("lcu-connector");
+const requestPromise = require('request-promise')
+const swaggerUI = require('swagger-ui')
+const axios = require('axios').default;
 let minimalizeButton;
 let closeButton;
 let fullscreenButton;
 let pleaseOpenLolLabel;
+let LCUData;
 const connector = new LCUConnector();
 
 const sleep = ms => {
@@ -36,7 +40,11 @@ window.onload = () => {
 
   sleep(1000).then(() => {
     connector.on("connect", data => {
-      pleaseOpenLolLabel.style.display = "none";
+      pleaseOpenLolLabel.innerText = "Ye ye u r logged."
+      LCUData = data;
+      console.log(data)
+      const { username, password, address, port } = LCUData;
+
     });
     connector.start();
   });
