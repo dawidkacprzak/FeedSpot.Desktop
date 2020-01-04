@@ -9,6 +9,7 @@ function createWindow() {
     width: 400,
     height: 300,
     frame: false,
+    backgroundColor: "#333333",
     hasShadow: false,
     alwaysOnTop: false,
     resizable: false,
@@ -30,11 +31,14 @@ ipcMain.on("loading_finished",event => {
   mainWin = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 300,
+    minHeight: 35,
     frame: false,
     hasShadow: false,
     alwaysOnTop: true,
     resizable: true,
     darkTheme: true,
+    backgroundColor: "#333333",
     webPreferences: {
       nodeIntegration: true
     },
