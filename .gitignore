@@ -10,8 +10,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-dev-app-update.yml*
-electron-builder.yml*
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -108,5 +107,8 @@ dist/
 # Temporary folders
 tmp/
 temp/
-
+dev-app-update.yml
+electron-builder.yml
+./dev-app-update.yml
+./electron-builder.yml
 # End of https://www.gitignore.io/api/node
