@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href='../styles/shared.css' />
-    <link rel="stylesheet" href='../styles/loading.css' />
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../styles/shared.css" />
+    <link rel="stylesheet" href="../styles/loading.css" />
     <script src="../src/PageSpecific/Loading.js"></script>
     <title>Loading</title>
-</head>
+  </head>
 
-<body class="dark-background">
+  <body class="dark-background">
     <h2>FeedSpot</h2>
     <img id="loading-logo" src="../content/images/logo_transparent.png" />
     <h4 id="loading-please-wait">Please wait</h4>
-    <h5 id="loading-state"></h5>
-</body>
-
+    <div id="loading-bottom">
+      <p class="loading-col-space"></p>
+      <h5 id="loading-state"></h5>
+      <p id="version" class="loading-col-space"></p>
+    </div>
+    <script>
+      const version = document.getElementById("version");
+      ipcRenderer.send("app_version");
+      ipcRenderer.on("app_version", (event, arg) => {
+        ipcRenderer.removeAllListeners("app_version");
+        version.innerText = "v" + arg.version;
+      });
+    </script>
+  </body>
 </html>

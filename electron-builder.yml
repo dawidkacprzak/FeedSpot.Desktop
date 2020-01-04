@@ -1,0 +1,4 @@
+appId: gg.feedspot.desktop
+publish:
+  provider: github
+  token: 67df3547f78944ebda14cb76e0179260d2ee3b26

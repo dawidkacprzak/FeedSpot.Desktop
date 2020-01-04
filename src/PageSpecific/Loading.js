@@ -1,5 +1,6 @@
 const axios = require("axios").default;
 const https = require("https");
+const { ipcRenderer } = require("electron");
 
 let statusLabel;
 
@@ -24,15 +25,12 @@ const MakeRequest = endpoint => {
 const CheckStatus = (endpoint, beforeText, failText) => {
   return new Promise((resolve, reject) => {
     statusLabel.innerText = beforeText;
-    sleep(1500).then(() => {
+    sleep(500).then(() => {
       MakeRequest(endpoint)
         .then(() => {
-          console.log("gucci " + endpoint);
           resolve(true);
         })
         .catch(e => {
-          console.log("not gucci" + endpoint);
-
           statusLabel.innerText = failText;
           reject(false);
         });
@@ -57,8 +55,17 @@ window.onload = () => {
         "Summoning Super Minions!",
         "Bleh! Error occured during communicating with riot service. Try again later!"
       ).then(() => {
-          alert("start aplikacji")
+        ipcRenderer.send("update-check");
       });
     });
   });
 };
+
+
+ipcRenderer.on("update-available", () => {
+    statusLabel.innerText = "There is a little update!";
+});
+
+ipcRenderer.on("update-not-available", () => {
+    alert("nie ma aktualizacji - aplikacja powinna sie tera wlaczyc ale nie ma tego ficzerka")
+});
