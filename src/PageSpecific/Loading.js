@@ -10,7 +10,8 @@ const sleep = ms => {
 
 const MakeRequest = endpoint => {
   return new Promise((resolve, reject) => {
-    let url = "http://localhost:5004/Main/" + endpoint;
+    let url = "http://feedspot.gg:85/Main/" + endpoint;
+    console.log(url);
     axios
       .get(url)
       .then(() => {

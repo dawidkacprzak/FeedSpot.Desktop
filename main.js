@@ -29,6 +29,8 @@ ipcMain.on("app_version", event => {
 ipcMain.on("update-check", event => {
   autoUpdater.autoDownload = false;
   autoUpdater.checkForUpdates().then((data)=>{
+  }).catch(()=>{
+    loadingWin.webContents.send("update-not-available");
   })
 })
 
