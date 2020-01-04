@@ -1,0 +1,68 @@
+body
+{
+    height: 100vh;
+}
+
+.app-func-icon
+{
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    -webkit-app-region: none;
+}
+
+.app-func-icon:hover
+{
+    -webkit-app-region: none;
+    background-color: #FFFFFF10;
+}
+
+#main-container
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#top-bar
+{
+    width: 100%;
+    height:35px;
+    background-color: #00000050;
+    display: flex;
+    -webkit-app-region: drag;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#app-icon
+{
+    height: 30px;
+    width: 30px;
+    margin-top: 2.5px;
+    margin-left: 5px;
+}
+
+#app-title
+{
+    line-height: 35px;
+    color:"#CCCCCC";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+#top-bar-left-app-info
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;  
+}
+
+#app-func-icons
+{
+    height: 35px;
+    margin-right: 10px;
+}

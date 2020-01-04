@@ -1,27 +1,36 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const { autoUpdater } = require("electron-updater");
 var path = require('path')
 const log  = require("electron-log");
+
 let loadingWin;
 let mainWin;
+
+
 function createWindow() {
-  loadingWin = new BrowserWindow({
-    width: 400,
-    height: 300,
+  mainWin = new BrowserWindow({
+    width: 800,
+    height: 600,
     frame: false,
     hasShadow: false,
-    alwaysOnTop: false,
-    resizable: false,
+    alwaysOnTop: true,
+    resizable: true,
+    darkTheme: true,
     webPreferences: {
       nodeIntegration: true
     },
     icon: path.join(__dirname,"content/images/icon.png")
   });
-  loadingWin.webContents.on("devtools-opened", () => {
-    //win.webContents.closeDevTools();
-  });
-  loadingWin.loadFile("./pages/Loading.html");
-
+  mainWin.loadFile("./pages/Main.html");
+  mainWin.removeMenu();
+  mainWin.moveTop();
+  mainWin.center();
+  mainWin.setAlwaysOnTop(false)
+  globalShortcut.register('f5', function() {
+		console.log('f5 is pressed')
+		mainWin.reload()
+	})
+  //loadingWin.close();
 }
 
 app.on("ready", createWindow);
@@ -30,9 +39,9 @@ ipcMain.on("loading_finished",event => {
   mainWin = new BrowserWindow({
     width: 800,
     height: 600,
-    frame: true,
+    frame: false,
     hasShadow: false,
-    alwaysOnTop: false,
+    alwaysOnTop: true,
     resizable: true,
     darkTheme: true,
     webPreferences: {
@@ -40,9 +49,11 @@ ipcMain.on("loading_finished",event => {
     },
     icon: path.join(__dirname,"content/images/icon.png")
   });
+  mainWin.loadFile("./pages/Main.html");
   mainWin.removeMenu();
   mainWin.moveTop();
   mainWin.center();
+  mainWin.setAlwaysOnTop(false)
   loadingWin.close();
 });
 
