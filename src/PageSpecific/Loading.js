@@ -9,7 +9,7 @@ const sleep = ms => {
 
 const MakeRequest = endpoint => {
   return new Promise((resolve, reject) => {
-    let url = "http://localhost:5005/Main/" + endpoint;
+    let url = "http://localhost:5004/Main/" + endpoint;
     axios
       .get(url)
       .then(() => {
@@ -54,7 +54,7 @@ window.onload = () => {
     ).then(() => {
       CheckStatus(
         "IsRiotActive",
-        "Summoning Super Minions",
+        "Summoning Super Minions!",
         "Bleh! Error occured during communicating with riot service. Try again later!"
       ).then(() => {
           alert("start aplikacji")
