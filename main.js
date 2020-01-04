@@ -1,7 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
+require('electron-reload')(__dirname);
 const { autoUpdater } = require("electron-updater");
 var path = require('path')
-const log  = require("electron-log");
 let loadingWin;
 let mainWin;
 function createWindow() {
@@ -17,9 +17,6 @@ function createWindow() {
       nodeIntegration: true
     },
     icon: path.join(__dirname,"content/images/icon.png")
-  });
-  loadingWin.webContents.on("devtools-opened", () => {
-    //win.webContents.closeDevTools();
   });
   loadingWin.loadFile("./pages/Loading.html");
 
@@ -49,7 +46,9 @@ ipcMain.on("loading_finished",event => {
   mainWin.moveTop();
   mainWin.center();
   mainWin.setAlwaysOnTop(false)
+  mainWin.webContents.openDevTools()
   loadingWin.close();
+
 });
 
 ipcMain.on("app_version", event => {
@@ -63,6 +62,30 @@ ipcMain.on("update-check", event => {
     loadingWin.webContents.send("update-not-available");
   })
 })
+
+ipcMain.on("minimalize",event => {
+  mainWin.minimize();
+})
+
+ipcMain.on("close",event => {
+  mainWin.close();
+})
+
+ipcMain.on("changeFullscreenState",event => {
+  if(mainWin.isFullScreen()){
+    mainWin.setFullScreen(false);
+  }else{
+    mainWin.setFullScreen(true);
+  }
+})
+
+ipcMain.on("getFullscreenIcon", event => {
+  if(mainWin.isFullScreen()){
+    mainWin.webContents.send("getFullscreenIcon", { icon:  'exit_fullscreen.png'});
+  }else{
+    mainWin.webContents.send("getFullscreenIcon", { icon: 'open_fullscreen.png' });
+  }
+});
 
 autoUpdater.on("update-not-available",data => {
   loadingWin.webContents.send("update-not-available")
