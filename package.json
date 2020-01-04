@@ -1,6 +1,6 @@
 {
   "name": "FeedSpot",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Desktop version of FeedSpot.gg ",
   "main": "main.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/capthapl/FeedSpot.Desktop.git"
   },
-  "author": "Dawid Kacprzak",
+  "author": "FeedSpot.gg",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/capthapl/FeedSpot.Desktop/issues"

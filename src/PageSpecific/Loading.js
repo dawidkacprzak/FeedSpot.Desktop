@@ -68,5 +68,5 @@ ipcRenderer.on("update-available", () => {
 });
 
 ipcRenderer.on("update-not-available", () => {
-    alert("nie ma aktualizacji - aplikacja powinna sie tera wlaczyc ale nie ma tego ficzerka")
+    ipcRenderer.send("loading_finished");
 });
