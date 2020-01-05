@@ -1,96 +1,205 @@
-body,html
-{
-    overflow: hidden;
+body,
+html {
+  overflow: hidden;
 }
 
-body
-{
-    height: 100vh;
+body {
+  height: 100vh;
 }
 
-.app-func-icon
+.app-func-icon {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  -webkit-app-region: none;
+}
+
+.app-func-icon:hover {
+  -webkit-app-region: none;
+  background-color: #ffffff10;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#top-bar {
+  width: 100%;
+  height: 35px;
+  background-color: #00000050;
+  display: flex;
+  -webkit-app-region: drag;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+#app-icon {
+  height: 30px;
+  width: 30px;
+  margin-top: 2.5px;
+  margin-left: 5px;
+}
+
+#app-title {
+  line-height: 35px;
+  color: "#CCCCCC";
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+#top-bar-left-app-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#app-func-icons {
+  height: 35px;
+  margin-right: 2px;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#waiting-for-league {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.fetched-card-container {
+  width: 250px;
+  border-radius: 5px;
+  background-color: #273349;
+  display: flex;
+  flex-direction: column;
+  height: 283px;
+  color: white;
+  margin: 20px;
+  border-bottom: 2px solid white;
+}
+
+.fetched-top
 {
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid white;
+    height: 25px;
+    color: white;
+    background-color: #18202e;
+    padding: 2px;
+}
+
+.fetched-full-block
+{
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    color: white;
+}
+
+.fetched-social-block
+{
+    text-align: center;
     height: 35px;
-    width: 35px;
-    cursor: pointer;
-    -webkit-app-region: none;
-}
-
-.app-func-icon:hover
-{
-    -webkit-app-region: none;
-    background-color: #FFFFFF10;
-}
-
-#main-container
-{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-#top-bar
-{
-    width: 100%;
-    height:35px;
-    background-color: #00000050;
-    display: flex;
-    -webkit-app-region: drag;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-#app-icon
-{
-    height: 30px;
-    width: 30px;
-    margin-top: 2.5px;
-    margin-left: 5px;
-}
-
-#app-title
-{
     line-height: 35px;
-    color:"#CCCCCC";
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-transform: uppercase;
-    margin-left: 5px;
-    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    background-color: #18202e;
+    cursor: pointer;
 }
 
-#top-bar-left-app-info
+.report-player-block
+{
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    color: white;
+    background-color: #18202e;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.percent-block
+{
+    text-align: center;
+    height: 45px;
+    line-height: 20px;
+    padding-top: 5px;
+    color: white;
+}
+
+.dark-bottom-border
+{
+    border-bottom: 2px solid #18202e;
+}
+
+.dark-right-border
+{
+    border-right: 2px solid #18202e;
+}
+
+.same-size-container
 {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;  
-}
-
-#app-func-icons
-{
-    height: 35px;
-    margin-right: 2px;
-}
-
-#content
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-#waiting-for-league
-{
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.content-box
-{
     width: 100%;
-    height: 100%;
+    align-items: stretch;
 }
 
-.hidden{
-    display: none;
+.opinion-count
+{
+    text-align: center;
+    flex-grow: 1;
+    color: white;
+}
+
+.social-left-margin
+{
+    margin-left: 1px;
+}
+
+.social-right-margin
+{
+    margin-right: 1px;
+}
+
+.hover-button:hover
+{
+    background-color: #1c273b;
+}
+
+.social-button
+{
+    margin-top: 2px;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    flex-grow: 1;
+    color: white;
+    background-color: #18202e;
+    cursor: pointer;
+}
+
+.content-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.hidden {
+  display: none;
 }

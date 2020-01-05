@@ -46,7 +46,6 @@ ipcMain.on("loading_finished",event => {
   mainWin.moveTop();
   mainWin.center();
   mainWin.setAlwaysOnTop(false)
-  mainWin.webContents.openDevTools()
   loadingWin.close();
 
 });
