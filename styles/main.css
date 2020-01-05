@@ -87,108 +87,95 @@ body {
   border-bottom: 2px solid white;
 }
 
-.fetched-top
-{
-    text-align: center;
-    font-weight: bold;
-    border-bottom: 2px solid white;
-    height: 25px;
-    color: white;
-    background-color: #18202e;
-    padding: 2px;
+.fetched-top {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid white;
+  height: 25px;
+  color: white;
+  background-color: #18202e;
+  padding: 2px;
 }
 
-.fetched-full-block
-{
-    text-align: center;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-    color: white;
+.fetched-full-block {
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: white;
 }
 
-.fetched-social-block
-{
-    text-align: center;
-    height: 35px;
-    line-height: 35px;
-    font-size: 15px;
-    color: white;
-    background-color: #18202e;
-    cursor: pointer;
+.fetched-social-block {
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  font-size: 15px;
+  color: white;
+  background-color: #18202e;
+  cursor: pointer;
 }
 
-.report-player-block
-{
-    text-align: center;
-    height: 35px;
-    line-height: 35px;
-    font-size: 15px;
-    color: white;
-    background-color: #18202e;
-    cursor: pointer;
-    margin-top: 2px;
+.report-player-block {
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  font-size: 15px;
+  color: white;
+  background-color: #18202e;
+  cursor: pointer;
+  margin-top: 2px;
 }
 
-.percent-block
-{
-    text-align: center;
-    height: 45px;
-    line-height: 20px;
-    padding-top: 5px;
-    color: white;
+.percent-block {
+  text-align: center;
+  height: 45px;
+  line-height: 20px;
+  padding-top: 5px;
+  color: white;
 }
 
-.dark-bottom-border
-{
-    border-bottom: 2px solid #18202e;
+.dark-bottom-border {
+  border-bottom: 2px solid #18202e;
 }
 
-.dark-right-border
-{
-    border-right: 2px solid #18202e;
+.dark-right-border {
+  border-right: 2px solid #18202e;
 }
 
-.same-size-container
-{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: stretch;
+.same-size-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
 }
 
-.opinion-count
-{
-    text-align: center;
-    flex-grow: 1;
-    color: white;
+.opinion-count {
+  text-align: center;
+  flex-grow: 1;
+  color: white;
 }
 
-.social-left-margin
-{
-    margin-left: 1px;
+.social-left-margin {
+  margin-left: 1px;
 }
 
-.social-right-margin
-{
-    margin-right: 1px;
+.social-right-margin {
+  margin-right: 1px;
 }
 
-.hover-button:hover
-{
-    background-color: #1c273b;
+.hover-button:hover {
+  background-color: #1c273b;
 }
 
-.social-button
-{
-    margin-top: 2px;
-    text-align: center;
-    height: 35px;
-    line-height: 35px;
-    flex-grow: 1;
-    color: white;
-    background-color: #18202e;
-    cursor: pointer;
+.social-button {
+  margin-top: 2px;
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  flex-grow: 1;
+  color: white;
+  background-color: #18202e;
+  cursor: pointer;
 }
 
 .content-box {
@@ -202,4 +189,21 @@ body {
 
 .hidden {
   display: none;
+}
+
+#fetched-players-container {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+::-webkit-scrollbar {     
+    background:  #0b0e14;
+    width: 15px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+    background:  #0f141d;
+    border-radius: 10px;
+    border: 3px solid #0b0e14;
 }

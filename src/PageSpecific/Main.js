@@ -53,17 +53,13 @@ window.onload = () => {
       pleaseOpenLolLabel.innerText = "Ye ye u r logged.";
       LCUData = data;
       const { username, password, address, port } = LCUData;
-      LCURequest("GET", "/lol-acs/v1/delta").then(delta => {
-        loggedServer = delta.originalPlatformId;
-        loggedServerInt = deltaServerToInt(loggedServer);
-        runCheckingLobbyLoop();
-      });
+      let fail = true;
+      console.log("sleep ten")
+      makeDeltaRequestAndStartLobbyLoop();
     });
 
     connector.on("disconnect", data => {
       clearInterval(checkingLobbyInterval);
-      loggedServer = null;
-      loggedServerInt = null;
       inLobby = false;
       connectedToChampionSelect = false;
     });
@@ -71,22 +67,40 @@ window.onload = () => {
   });
 };
 
+
+const makeDeltaRequestAndStartLobbyLoop = () => {
+  LCURequest("GET", "/lol-acs/v1/delta").then(delta => {
+    try{
+    loggedServer = delta.originalPlatformId;
+    loggedServerInt = deltaServerToInt(loggedServer);
+    runCheckingLobbyLoop();
+    }catch(e){
+      makeDeltaRequestAndStartLobbyLoop();
+    }
+  }).catch(()=>{
+    makeDeltaRequestAndStartLobbyLoop();
+  })
+}
+
 const runCheckingLobbyLoop = () => {
+  console.log("LOOP STARTED")
+  clearInterval(checkingLobbyInterval);
   checkingLobbyInterval = setInterval(function() {
     LCURequest("GET", "/lol-champ-select/v1/session")
       .then(e => {
         if (!inLobby) {
           pleaseOpenLolLabel.innerText = "Fetching data from champion select.";
-          console.log("connected to lobby");
-          console.log("im on server : " + loggedServer + " " + loggedServerInt);
           inLobby = true;
           let myTeam = e.myTeam;
           let chatDetails = e.chatDetails;
           connectedToChampionSelect = true;
           let matchedSummoners = [];
+          console.log(JSON.stringify(myTeam));
+
           myTeam.forEach(player => {
-            if (player.playerType == "PLAYER") {
+            if (player.playerType == "PLAYER" || player.playerType == "") {
               matchedSummoners.push(player.summonerId);
+              console.log("push " + player);
             }
           });
           LCURequest(
@@ -207,8 +221,7 @@ const championSelectPresentation = modelArr => {
       opn(
         "https://feedspot.gg/player?nicknames=" +
           nickname +
-          "&server=" +
-          loggedServerInt
+          "&server="+loggedServerInt
       );
 
     let OpggLog = document.createElement("div");
