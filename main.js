@@ -27,7 +27,7 @@ ipcMain.on("loading_finished", event => {
   mainWin = new BrowserWindow({
     width: 800,
     height: 600,
-    minWidth: 300,
+    minWidth: 800,
     minHeight: 35,
     frame: false,
     hasShadow: false,

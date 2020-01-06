@@ -183,9 +183,6 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: start;
 }
 
 .content-content-box {
@@ -198,89 +195,139 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 #fetched-players-container {
   overflow-y: auto;
   overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
-::-webkit-scrollbar {     
-    background:  #0b0e14;
-    width: 15px;
-    border-radius: 10px;
+::-webkit-scrollbar {
+  background: #0b0e14;
+  width: 15px;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive,
 ::-webkit-scrollbar-thumb {
-    background:  #0f141d;
-    border-radius: 10px;
-    border: 3px solid #0b0e14;
+  background: #0f141d;
+  border-radius: 10px;
+  border: 3px solid #0b0e14;
 }
 
-#menu{
-    background-color: #00000050;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    width: 70px;
+#menu {
+  background-color: #00000050;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 70px;
+  user-select: none;
 }
 
-.menu-button
-{
-    width: 65px;
-    height: 65px;
-    border-radius: 5px;
-    background-color: #FFFFFF09;
-    margin: 4px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.menu-button {
+  width: 65px;
+  height: 65px;
+  border-radius: 5px;
+  background-color: #ffffff09;
+  margin: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.menu-button span
-{
+.menu-button span {
   font-size: 12px;
   font-weight: bold;
   text-align: center;
 }
 
-.menu-button img {  /*  icon color: #EEEEEE  */
-    width: 40px;
-    height: 40px;
+.menu-button img {
+  /*  icon color: #EEEEEE  */
+  width: 40px;
+  height: 40px;
 }
-.menu-button:hover
-{
-    background-color: #FFFFFF20;
+.menu-button:hover {
+  background-color: #ffffff20;
 }
 
-#league-status-label
-{
+#league-status-label {
   width: 100%;
   height: 40px;
   background-color: #00000050;
   line-height: 40px;
   font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
 }
 
-.tab-pre-info
-{
+.tab-pre-info {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
   width: 100%;
-  display:flex;
+  height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.selected-menu
-{
-  background-color: #FFFFFF19 !important;
+.selected-menu {
+  background-color: #ffffff19 !important;
+}
+
+#content-label {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#content-label-content {
+  height: 30px;
+  width: 100%;
+  background-color: rgb(83, 125, 204);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+#share-text {
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: #eeeeee;
+}
+
+#share-button {
+  height: 13px;
+  background-color: white;
+  color: rgb(74, 111, 182);
+  text-align: center;
+  line-height: 13px;
+  font-weight: bold;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 1px;
+  user-select: none;
+  cursor: pointer;
+}
+#content-w-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }

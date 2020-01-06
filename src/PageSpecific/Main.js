@@ -1,4 +1,4 @@
-const { ipcRenderer, ipcMain } = require("electron");
+const { ipcRenderer, ipcMain, clipboard } = require("electron");
 const LCUConnector = require("lcu-connector");
 const https = require("https");
 const swaggerUI = require("swagger-ui");
@@ -12,7 +12,8 @@ let fullscreenButton;
 let leagueClientStatusLabel;
 let LCUData;
 let checkingLobbyInterval;
-
+let contentLabel;
+let contentLabelContent;
 let connectedToChampionSelect = false;
 let loggedServer;
 let loggedServerInt;
@@ -25,6 +26,9 @@ const sleep = ms => {
 };
 
 window.onload = () => {
+  contentLabel = document.getElementById("content-label");
+  contentLabelContent = document.getElementById("content-label-content");
+
   minimalizeButton = document.getElementById("app-func-minimalize");
   closeButton = document.getElementById("app-func-close");
   fullscreenButton = document.getElementById("app-func-fullscreen");
@@ -58,7 +62,7 @@ window.onload = () => {
 
   sleep(1000).then(() => {
     connector.on("connect", data => {
-      console.log("connected")
+      console.log("connected");
       leagueClientStatusLabel.innerText = "Connected to league client";
       LCUData = data;
       const { username, password, address, port } = LCUData;
@@ -68,10 +72,18 @@ window.onload = () => {
     });
 
     connector.on("disconnect", data => {
-      leagueClientStatusLabel.innerText = "Disconnected from league client";
-      clearInterval(checkingLobbyInterval);
-      inLobby = false;
-      connectedToChampionSelect = false;
+      try {
+        leagueClientStatusLabel.innerText = "Disconnected from league client";
+        clearInterval(checkingLobbyInterval);
+        inLobby = false;
+        connectedToChampionSelect = false;
+
+        if (contentLabel.classList.contains("hidden")) {
+          contentLabel.classList.remove("hidden");
+        }
+      } catch (ex) {
+        console.log(ex);
+      }
     });
     connector.start();
   });
@@ -100,7 +112,8 @@ const runCheckingLobbyLoop = () => {
     LCURequest("GET", "/lol-champ-select/v1/session")
       .then(e => {
         if (!inLobby) {
-          leagueClientStatusLabel.innerText = "Fetching data from champion select";
+          leagueClientStatusLabel.innerText =
+            "Fetching data from champion select";
           inLobby = true;
           let myTeam = e.myTeam;
           let chatDetails = e.chatDetails;
@@ -156,7 +169,7 @@ const runCheckingLobbyLoop = () => {
 const championSelectPresentation = modelArr => {
   let container = document.getElementById("fetched-players-container");
   container.innerHTML = "";
-
+  let nicknames = []
   modelArr.forEach(player => {
     console.log(player);
     let playerJSONModel = JSON.parse(player);
@@ -256,8 +269,7 @@ const championSelectPresentation = modelArr => {
     reportPlayer.classList.add("report-player-block");
     reportPlayer.classList.add("hover-button");
     reportPlayer.innerText = "Report player";
-    reportPlayer.onclick = () => {
-    }
+    reportPlayer.onclick = () => {};
 
     OpggLog.appendChild(opgg);
     OpggLog.appendChild(log);
@@ -269,13 +281,39 @@ const championSelectPresentation = modelArr => {
     cardContainer.appendChild(openOnWeb);
     cardContainer.appendChild(OpggLog);
     cardContainer.appendChild(reportPlayer);
-
     container.appendChild(cardContainer);
+
+    nicknames.push(nickname)
   });
   if (container.classList.contains("hidden")) {
-    container.classList.re("hidden");
+    container.classList.remove("hidden");
+  }
+  let contentLabelShare = document.createElement("p");
+  let contentLabelButton = document.createElement("div");
+
+  contentLabelShare.id = "share-text";
+  contentLabelShare.innerText =
+    "Maximalize your win chance, let your teammates know about this match";
+
+  contentLabelButton.id = "share-button";
+  contentLabelButton.innerText = "Copy link";
+  contentLabelButton.onclick = () => {
+    if(nicknames.length>1){
+      clipboard.writeText("https://feedspot.gg/players?nicknames="+nicknames.join()+"&server="+loggedServerInt)
+    }else{
+      clipboard.writeText("https://feedspot.gg/player?nicknames="+nicknames.join()+"&server="+loggedServerInt)
+
+    }
+  }
+  contentLabelContent.innerHTML = "";
+  contentLabelContent.appendChild(contentLabelShare);
+  contentLabelContent.appendChild(contentLabelButton);
+
+  if (contentLabel.classList.contains("hidden")) {
+    contentLabel.classList.remove("hidden");
   }
   ipcRenderer.send("top-window");
+  document.getElementById("menu-button-snipe").click();
   leagueClientStatusLabel.innerText = "Connected to league client";
 };
 
