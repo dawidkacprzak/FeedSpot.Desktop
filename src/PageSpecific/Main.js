@@ -9,7 +9,7 @@ const opn = require("opn");
 let minimalizeButton;
 let closeButton;
 let fullscreenButton;
-let pleaseOpenLolLabel;
+let leagueClientStatusLabel;
 let LCUData;
 let checkingLobbyInterval;
 
@@ -28,7 +28,15 @@ window.onload = () => {
   minimalizeButton = document.getElementById("app-func-minimalize");
   closeButton = document.getElementById("app-func-close");
   fullscreenButton = document.getElementById("app-func-fullscreen");
-  pleaseOpenLolLabel = document.getElementById("waiting-for-league");
+  leagueClientStatusLabel = document.getElementById("league-status-label");
+
+  let buttons = document.getElementsByClassName("menu-button");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = e => {
+      ChangeMenuTab(buttons[i].id);
+    };
+  }
+
   ipcRenderer.send("getFullscreenIcon");
 
   minimalizeButton.onclick = () => {
@@ -50,15 +58,17 @@ window.onload = () => {
 
   sleep(1000).then(() => {
     connector.on("connect", data => {
-      pleaseOpenLolLabel.innerText = "Ye ye u r logged.";
+      console.log("connected")
+      leagueClientStatusLabel.innerText = "Connected to league client";
       LCUData = data;
       const { username, password, address, port } = LCUData;
       let fail = true;
-      console.log("sleep ten")
+      console.log("sleep ten");
       makeDeltaRequestAndStartLobbyLoop();
     });
 
     connector.on("disconnect", data => {
+      leagueClientStatusLabel.innerText = "Disconnected from league client";
       clearInterval(checkingLobbyInterval);
       inLobby = false;
       connectedToChampionSelect = false;
@@ -67,29 +77,30 @@ window.onload = () => {
   });
 };
 
-
 const makeDeltaRequestAndStartLobbyLoop = () => {
-  LCURequest("GET", "/lol-acs/v1/delta").then(delta => {
-    try{
-    loggedServer = delta.originalPlatformId;
-    loggedServerInt = deltaServerToInt(loggedServer);
-    runCheckingLobbyLoop();
-    }catch(e){
+  LCURequest("GET", "/lol-acs/v1/delta")
+    .then(delta => {
+      try {
+        loggedServer = delta.originalPlatformId;
+        loggedServerInt = deltaServerToInt(loggedServer);
+        runCheckingLobbyLoop();
+      } catch (e) {
+        makeDeltaRequestAndStartLobbyLoop();
+      }
+    })
+    .catch(() => {
       makeDeltaRequestAndStartLobbyLoop();
-    }
-  }).catch(()=>{
-    makeDeltaRequestAndStartLobbyLoop();
-  })
-}
+    });
+};
 
 const runCheckingLobbyLoop = () => {
-  console.log("LOOP STARTED")
+  console.log("LOOP STARTED");
   clearInterval(checkingLobbyInterval);
   checkingLobbyInterval = setInterval(function() {
     LCURequest("GET", "/lol-champ-select/v1/session")
       .then(e => {
         if (!inLobby) {
-          pleaseOpenLolLabel.innerText = "Fetching data from champion select.";
+          leagueClientStatusLabel.innerText = "Fetching data from champion select";
           inLobby = true;
           let myTeam = e.myTeam;
           let chatDetails = e.chatDetails;
@@ -145,7 +156,6 @@ const runCheckingLobbyLoop = () => {
 const championSelectPresentation = modelArr => {
   let container = document.getElementById("fetched-players-container");
   container.innerHTML = "";
-  document.getElementById("waiting-for-league").classList.add("hidden");
 
   modelArr.forEach(player => {
     console.log(player);
@@ -221,7 +231,8 @@ const championSelectPresentation = modelArr => {
       opn(
         "https://feedspot.gg/player?nicknames=" +
           nickname +
-          "&server="+loggedServerInt
+          "&server=" +
+          loggedServerInt
       );
 
     let OpggLog = document.createElement("div");
@@ -259,7 +270,11 @@ const championSelectPresentation = modelArr => {
 
     container.appendChild(cardContainer);
   });
-  container.classList.remove("hidden");
+  if (container.classList.contains("hidden")) {
+    container.classList.re("hidden");
+  }
+  ipcRenderer.send("top-window");
+  leagueClientStatusLabel.innerText = "Connected to league client";
 };
 
 const LCURequest = (method, endpoint) => {

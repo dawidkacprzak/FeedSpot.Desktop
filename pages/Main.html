@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <script src="../src/PageSpecific/Main.js"></script>
+    <script src="../src/PageSpecific/Main-Menu.js"></script>
     <title>FeedSpot</title>
   </head>
   <body class="dark-background">
@@ -34,27 +35,37 @@
       </div>
       <div id="content">
         <div id="menu">
-          <div class="menu-button">
+          <div id="menu-button-snipe" class="menu-button">
             <img src="../content/images/snipe.png" />
+            <span>Spotting</span>
           </div>
-          <div class="menu-button">
+          <div id="menu-button-stats" class="menu-button">
             <img src="../content/images/stats.png" />
+            <span>Stats</span>
           </div>
-          <div class="menu-button">
+          <div id="menu-button-account" class="menu-button">
             <img src="../content/images/star.png" />
+            <span>Account</span>
           </div>
-          <div class="menu-button">
+          <div id="menu-button-website" class="menu-button">
             <img src="../content/images/global.png" />
+            <span>Website</span>
           </div>
-          <div class="menu-button">
+          <div id="menu-button-bugs" class="menu-button">
             <img src="../content/images/bug.png" />
+            <span>Bugs</span>
           </div>
         </div>
-        <div id="fetched-players-container" class="content-box">
-          <span id="waiting-for-league">
-            Please sign in to league of legends client.
-          </span>
+        <div class="content-content-box">
+          <div id="fetched-players-container" class="content-box">
+            <div class="tab-pre-info">
+              <span>You must be in champion select to use this tab</span>
+            </div>
+          </div>
         </div>
+      </div>
+      <div id="league-status-label">
+        Please log in to league of legends client
       </div>
     </div>
   </body>
