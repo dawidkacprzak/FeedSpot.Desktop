@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/main.css" />
-    <script src="../src/PageSpecific/Main.js"></script>
     <script src="../src/PageSpecific/Main-Menu.js"></script>
+    <script src="../src/PageSpecific/Main.js"></script>
     <title>FeedSpot</title>
   </head>
   <body class="dark-background">
@@ -35,9 +35,13 @@
       </div>
       <div id="content">
         <div id="menu">
-          <div id="menu-button-snipe" class="menu-button">
+          <div id="menu-button-snipe" class="menu-button selected-menu">
             <img src="../content/images/snipe.png" />
             <span>Spotting</span>
+          </div>
+          <div id="menu-button-report" class="menu-button">
+            <img src="../content/images/report.png" />
+            <span>Reporting</span>
           </div>
           <div id="menu-button-stats" class="menu-button">
             <img src="../content/images/stats.png" />
@@ -58,6 +62,11 @@
         </div>
         <div class="content-content-box">
           <div id="fetched-players-container" class="content-box">
+            <div class="tab-pre-info">
+              <span>You must be in champion select to use this tab</span>
+            </div>
+          </div>
+          <div id="report-player-container" class="content-box hidden">
             <div class="tab-pre-info">
               <span>You must be in champion select to use this tab</span>
             </div>

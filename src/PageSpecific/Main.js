@@ -256,6 +256,8 @@ const championSelectPresentation = modelArr => {
     reportPlayer.classList.add("report-player-block");
     reportPlayer.classList.add("hover-button");
     reportPlayer.innerText = "Report player";
+    reportPlayer.onclick = () => {
+    }
 
     OpggLog.appendChild(opgg);
     OpggLog.appendChild(log);

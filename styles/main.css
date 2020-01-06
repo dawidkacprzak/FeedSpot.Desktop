@@ -279,3 +279,8 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.selected-menu
+{
+  background-color: #FFFFFF19 !important;
+}

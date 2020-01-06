@@ -47,7 +47,7 @@ ipcMain.on("loading_finished", event => {
   setTimeout(() => {
     mainWin.setAlwaysOnTop(false);
   }, 200);
-  //mainWin.webContents.openDevTools();
+  mainWin.webContents.openDevTools();
   loadingWin.close();
 });
 
