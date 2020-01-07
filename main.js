@@ -25,8 +25,8 @@ app.on("ready", createWindow);
 
 ipcMain.on("loading_finished", event => {
   mainWin = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 850,
+    height: 730,
     minWidth: 800,
     minHeight: 35,
     frame: false,
@@ -47,7 +47,7 @@ ipcMain.on("loading_finished", event => {
   setTimeout(() => {
     mainWin.setAlwaysOnTop(false);
   }, 200);
-  mainWin.webContents.openDevTools();
+  //mainWin.webContents.openDevTools();
   loadingWin.close();
 });
 

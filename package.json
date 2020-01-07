@@ -1,6 +1,6 @@
 {
   "name": "FeedSpot",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Desktop version of FeedSpot.gg ",
   "main": "main.js",
   "scripts": {
