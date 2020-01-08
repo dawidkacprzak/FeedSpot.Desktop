@@ -16,7 +16,10 @@ const ChangeMenuTab = senderId => {
       break;
     case "menu-button-bugs":
       break;
-      case "menu-button-report":
+    case "menu-button-report":
+      document
+      .getElementById("report-player-container")
+      .classList.remove("hidden");
         break;
     default:
       correct = false;
