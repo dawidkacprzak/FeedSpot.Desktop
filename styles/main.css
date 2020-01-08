@@ -238,6 +238,8 @@ body {
   border-radius: 5px;
   background-color: #ffffff09;
   margin: 4px;
+  margin-top: 0px;
+  margin-bottom: 8px;
   cursor: pointer;
   display: flex;
   justify-content: center;
