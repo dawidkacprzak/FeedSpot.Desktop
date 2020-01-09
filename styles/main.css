@@ -339,6 +339,8 @@ body {
 #report-player-notification-label
 {
   padding: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
   text-align: center;
   width: 100%;
   background-color: #80808010;
@@ -369,6 +371,7 @@ body {
 {
   font-size: 15px;
   margin-bottom: 4px;
+  text-align: left;
 }
 
 .report-input-container input
@@ -379,6 +382,7 @@ body {
   padding-left: 5px;
   border-radius: 2px;
   border: none;
+  background-color: #DDDDDD;
 }
 
 .report-input-serverchoose
@@ -387,13 +391,17 @@ body {
   flex-direction: row;
   text-align: left;
   width: 300px;
-  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
   border-radius: 2px;
-  background-color: white;
+  background-color: #DDDDDD;
   padding-right: 2px;
 
+}
+
+.report-input-serverchoose select {
+  background-color: #DDDDDD;
+border: none;
 }
 
 .report-input-serverchoose input
@@ -422,5 +430,75 @@ body {
   background-color: #ffffff03;
   border-left: 2px solid #00000010;
   border-right: 2px solid #00000010;
+  display: flex;
+  flex-direction: column;
+}
 
+#report-form p
+{
+  text-align: center;
+  color: #EEEEEE;
+}
+
+#report-description
+{
+  height: 120px;
+  color: #333333;
+  font-size: 15px;
+  padding-top: 5px;
+  width: 100%;
+  border-radius: 2px;
+  resize: none;
+  background-color: #DDDDDD;
+}
+
+#report-description::-webkit-scrollbar {
+  background: #0b0e14;
+  width: 10px;
+  border-radius: 0 !important;
+
+}
+
+#report-description::-webkit-scrollbar-thumb:window-inactive,
+#report-description::-webkit-scrollbar-thumb {
+  background: #232e42;
+  border-radius: 0 !important;
+  border: 3px solid #0b0e14;
+}
+
+.horizontal-button-container
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.horizontal-button-container button{
+  width:50%;
+  height:25px;
+  margin:1px;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #333333;
+  background-color: #DDDDDD;
+
+}
+.selected-report-type
+{
+  font-weight: bold;
+  background-color: #bbbbbb !important;
+}
+
+#submit-opinion-button
+{
+  width: 300px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:#272e3b;
+  border-radius: 2px;
+  border: 1px solid #ffffff20;
+  font-size: 13px;
+  cursor: pointer;
 }

@@ -58,37 +58,46 @@
           </div>
           <div id="report-player-container" class="content-box">
             <div id="report-player-notification-label">
-              Thank you for your cooperation in making league of legends community even better!<br/>
+              Thank you for your cooperation in making league of legends community even better!<br />
               Remember to keep the culture in your opinion description.
-              <br/>~FeedSpot.gg team
+              <br />~FeedSpot.gg team
             </div>
             <div id="report-form">
-            <br />
-            <p>Fill form to submit you opinion</p>
-            <br />
-            <div class="report-input-serverchoose">
-              <input type="text" />
-              <select className="searchbar_server_box gray_border_outline" defaultValue="EUNE">
-                <option value="0">EUNE</option>
-                <option value="1">EUW</option>
-                <option value="4">NA</option>
-                <option value="2">RU</option>
-                <option value="3">TR</option>
-              </select>
+              <br />
+              <p>Fill form to submit you opinion</p>
+              <br />
+
+              <div class="report-input-container">
+                <span>Reported player</span>
+                <div class="report-input-serverchoose">
+                  <input type="text" />
+                  <select defaultValue="EUNE">
+                    <option value="0">EUNE</option>
+                    <option value="1">EUW</option>
+                    <option value="4">NA</option>
+                    <option value="2">RU</option>
+                    <option value="3">TR</option>
+                  </select>
+                </div>
+              </div>
+              <div class="report-input-container">
+                <span>Description</span>
+                <textarea id="report-description"> </textarea>
+              </div>
+              <div class="report-input-container">
+                <span>Opinion type</span>
+                <div class="horizontal-button-container">
+                  <button class="selected-report-type">Positive</button>
+                  <button>Negative</button>
+                </div>
+              </div>
+              <div class="report-input-container">
+                <span>Your name</span>
+                <input type="text" />
+              </div>
+
+              <button id="submit-opinion-button">Submit opinion</button>
             </div>
-            <div class="report-input-container">
-              <span>input label</span>
-              <input type="text" />
-            </div>
-            <div class="report-input-container">
-              <span>input label</span>
-              <input type="text" />
-            </div>
-            <div class="report-input-container">
-              <span>input label</span>
-              <input type="text" />
-            </div>
-          </div>
           </div>
         </div>
         <div id="content-label" class="hidden">
