@@ -389,6 +389,8 @@ const deltaServerToInt = server => {
 ///reportedForm
 
 const submitReport = () => {
+  reportedSubmitButton.disabled = true;
+  reportedSubmitButton.innerText = "Please wait...";
   const getIP = require("external-ip")();
   let CommentType = getReportOpinionType() ? 1 : 0;
   let CreatedDate = Date.now();
@@ -409,9 +411,12 @@ const submitReport = () => {
       const { dialog } = require('electron')
  
        MakeRequest("AddReportToPlayer?simpleCommentJSONModel="+encodeURIComponent(JSON.stringify(jsonModel))).then((e)=>{
-         alert("gut gut")
+         alert("Opinion has been added")
        }).catch((e)=>{
         Dialog.alert(e)
+       }).finally(()=>{
+        reportedSubmitButton.disabled = false;
+        reportedSubmitButton.innerText = "Submit opinion";
        })
       
       console.log(jsonModel);
