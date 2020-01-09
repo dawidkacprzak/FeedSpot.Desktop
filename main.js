@@ -18,7 +18,7 @@ function createWindow() {
     },
     icon: path.join(__dirname, "content/images/icon.png")
   });
-  loadingWin.webContents.openDevTools()
+  //loadingWin.webContents.openDevTools()
 
   loadingWin.loadFile("./pages/Loading.html");
 }
@@ -41,7 +41,7 @@ ipcMain.on("loading_finished", event => {
     },
     icon: path.join(__dirname, "content/images/icon.png")
   });
-  mainWin.webContents.openDevTools()
+  //mainWin.webContents.openDevTools()
   mainWin.removeMenu();
 
   mainWin.loadFile("./pages/Main.html");
@@ -58,13 +58,8 @@ ipcMain.on("app_version", event => {
 });
 
 ipcMain.on("update-check", event => {
-  autoUpdater.autoDownload = false;
-  autoUpdater
-    .checkForUpdates()
-    .then(data => {})
-    .catch(() => {
-      loadingWin.webContents.send("update-not-available");
-    });
+  autoUpdater.autoDownload = true;
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 ipcMain.on("top-window", event => {
@@ -88,7 +83,4 @@ autoUpdater.on("update-not-available", data => {
 
 autoUpdater.on("update-available", data => {
   loadingWin.webContents.send("update-available");
-  autoUpdater.downloadUpdate().then(e => {
-    autoUpdater.quitAndInstall();
-  });
 });
