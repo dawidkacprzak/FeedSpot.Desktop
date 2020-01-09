@@ -18,6 +18,14 @@ let loggedServer;
 let loggedServerInt;
 let inLobby = false;
 
+//report form
+let reportedPlayer;
+let reportedServer;
+let reportedDescripton;
+let reportedYourName;
+///
+
+
 const connector = new LCUConnector();
 
 const sleep = ms => {
@@ -31,6 +39,10 @@ window.onload = () => {
   minimalizeButton = document.getElementById("app-func-minimalize");
   closeButton = document.getElementById("app-func-close");
   leagueClientStatusLabel = document.getElementById("league-status-label");
+
+  reportedPlayer = document.getElementById("report-data-reported");
+  reportedServer = document.getElementById("report-data-server").value;
+  alert(reportedServer);
 
   let buttons = document.getElementsByClassName("menu-button");
   for (let i = 0; i < buttons.length; i++) {
@@ -356,3 +368,11 @@ const deltaServerToInt = server => {
       return 4;
   }
 };
+
+
+///reportedForm
+const getReportOpinionType = () => {
+
+}
+
+///

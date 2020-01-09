@@ -401,7 +401,7 @@ body {
 
 .report-input-serverchoose select {
   background-color: #DDDDDD;
-border: none;
+  border: none;
 }
 
 .report-input-serverchoose input
@@ -440,7 +440,7 @@ border: none;
   color: #EEEEEE;
 }
 
-#report-description
+#report-data-description
 {
   height: 120px;
   color: #333333;

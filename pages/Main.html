@@ -70,8 +70,8 @@
               <div class="report-input-container">
                 <span>Reported player</span>
                 <div class="report-input-serverchoose">
-                  <input type="text" />
-                  <select defaultValue="EUNE">
+                  <input type="text" id="report-data-reported" />
+                  <select id="report-data-server" defaultValue="EUNE">
                     <option value="0">EUNE</option>
                     <option value="1">EUW</option>
                     <option value="4">NA</option>
@@ -82,18 +82,18 @@
               </div>
               <div class="report-input-container">
                 <span>Description</span>
-                <textarea id="report-description"> </textarea>
+                <textarea id="report-data-description"> </textarea>
               </div>
               <div class="report-input-container">
                 <span>Opinion type</span>
                 <div class="horizontal-button-container">
-                  <button class="selected-report-type">Positive</button>
-                  <button>Negative</button>
+                  <button id="report-data-positive" class="selected-report-type">Positive</button>
+                  <button id="report-data-positive">Negative</button>
                 </div>
               </div>
               <div class="report-input-container">
                 <span>Your name</span>
-                <input type="text" />
+                <input id="report-data-nickname" type="text" />
               </div>
 
               <button id="submit-opinion-button">Submit opinion</button>
