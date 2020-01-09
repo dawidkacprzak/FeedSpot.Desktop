@@ -1,4 +1,5 @@
 const { ipcRenderer, ipcMain, clipboard } = require("electron");
+const Dialog = require('electron-dialog');
 const LCUConnector = require("lcu-connector");
 const https = require("https");
 const swaggerUI = require("swagger-ui");
@@ -404,6 +405,15 @@ const submitReport = () => {
       const jsonModel = {
         CommentType,CreatedDate,Description,ReportOwner,Server,ReportedPlayer,IP
       }
+      const dialogOptions = {type: 'info', buttons: ['OK', 'Cancel'], message: 'Do it?'}
+      const { dialog } = require('electron')
+ 
+       MakeRequest("AddReportToPlayer?simpleCommentJSONModel="+encodeURIComponent(JSON.stringify(jsonModel))).then((e)=>{
+         alert("gut gut")
+       }).catch((e)=>{
+        Dialog.alert(e)
+       })
+      
       console.log(jsonModel);
     }
   });
@@ -439,3 +449,18 @@ const getReportOpinionType = () => {
 };
 
 ///
+
+const MakeRequest = endpoint => {
+  return new Promise((resolve, reject) => {
+    let url = "http://feedspot.gg:85/Main/" + endpoint;
+    console.log(url);
+    axios
+      .get(url)
+      .then(() => {
+        resolve(true);
+      })
+      .catch(ex => {
+        reject(ex.response.data);
+      });
+  });
+};
