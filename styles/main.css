@@ -344,7 +344,7 @@ body {
   text-align: center;
   width: 100%;
   background-color: #80808010;
-  height: 55px;
+  height: 60px;
   -webkit-box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.75);
   box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.75);  font-size: 15px;
@@ -402,6 +402,12 @@ body {
 .report-input-serverchoose select {
   background-color: #DDDDDD;
   border: none;
+  color: #333333;
+}
+
+.report-input-serverchoose select option {
+
+  color: #333333;
 }
 
 .report-input-serverchoose input
@@ -480,6 +486,7 @@ body {
   margin:1px;
   cursor: pointer;
   border-radius: 2px;
+  border: none;
   color: #333333;
   background-color: #DDDDDD;
 
@@ -499,6 +506,6 @@ body {
   background-color:#272e3b;
   border-radius: 2px;
   border: 1px solid #ffffff20;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
 }

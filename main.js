@@ -29,6 +29,7 @@ ipcMain.on("loading_finished", event => {
     height: 730,
     frame: false,
     hasShadow: false,
+    show: false,
     alwaysOnTop: false,
     resizable: false,
     darkTheme: true,
@@ -38,15 +39,13 @@ ipcMain.on("loading_finished", event => {
     },
     icon: path.join(__dirname, "content/images/icon.png")
   });
-  mainWin.loadFile("./pages/Main.html");
   mainWin.removeMenu();
-  mainWin.center();
-  mainWin.setAlwaysOnTop(true);
-  setTimeout(() => {
-    mainWin.setAlwaysOnTop(false);
-  }, 200);
-  //mainWin.webContents.openDevTools();
-  loadingWin.close();
+
+  mainWin.loadFile("./pages/Main.html");
+  mainWin.webContents.on("did-finish-load", function() {
+    mainWin.show();
+    loadingWin.close();
+  });
 });
 
 ipcMain.on("app_version", event => {
