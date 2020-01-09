@@ -39,12 +39,15 @@ ipcMain.on("loading_finished", event => {
     },
     icon: path.join(__dirname, "content/images/icon.png")
   });
+  mainWin.webContents.openDevTools()
   mainWin.removeMenu();
 
   mainWin.loadFile("./pages/Main.html");
   mainWin.webContents.on("did-finish-load", function() {
     mainWin.show();
-    loadingWin.close();
+    try {
+      loadingWin.close();
+    } catch (ex) {}
   });
 });
 

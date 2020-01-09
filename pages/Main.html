@@ -66,7 +66,6 @@
               <br />
               <p>Fill form to submit you opinion</p>
               <br />
-
               <div class="report-input-container">
                 <span>Reported player</span>
                 <div class="report-input-serverchoose">
@@ -87,8 +86,8 @@
               <div class="report-input-container">
                 <span>Opinion type</span>
                 <div class="horizontal-button-container">
-                  <button id="report-data-positive" class="selected-report-type">Positive</button>
-                  <button id="report-data-positive">Negative</button>
+                  <button onclick="setReportOpinionType(true)" id="report-data-positive">Positive</button>
+                  <button onclick="setReportOpinionType(false)" id="report-data-negative" class="selected-report-type">Negative</button>
                 </div>
               </div>
               <div class="report-input-container">

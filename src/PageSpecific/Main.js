@@ -19,12 +19,14 @@ let loggedServerInt;
 let inLobby = false;
 
 //report form
-let reportedPlayer;
+let reportedPlayerNick;
 let reportedServer;
 let reportedDescripton;
 let reportedYourName;
+let reportedPositiveButton;
+let reportedNegativeButton;
+let reportedSubmitButton;
 ///
-
 
 const connector = new LCUConnector();
 
@@ -40,9 +42,14 @@ window.onload = () => {
   closeButton = document.getElementById("app-func-close");
   leagueClientStatusLabel = document.getElementById("league-status-label");
 
-  reportedPlayer = document.getElementById("report-data-reported");
-  reportedServer = document.getElementById("report-data-server").value;
-  alert(reportedServer);
+  reportedPlayerNick = document.getElementById("report-data-reported");
+  reportedServer = document.getElementById("report-data-server");
+  reportedSubmitButton = document.getElementById("submit-opinion-button");
+  reportedPositiveButton = document.getElementById("report-data-positive");
+  reportedNegativeButton = document.getElementById("report-data-negative");
+  reportedDescripton = document.getElementById("report-data-description");
+  reportedYourName = document.getElementById("report-data-nickname"); 
+  reportedSubmitButton.onclick = () => submitReport();
 
   let buttons = document.getElementsByClassName("menu-button");
   for (let i = 0; i < buttons.length; i++) {
@@ -170,7 +177,7 @@ const runCheckingLobbyLoop = () => {
 const championSelectPresentation = modelArr => {
   let container = document.getElementById("fetched-players-container");
   container.innerHTML = "";
-  let nicknames = []
+  let nicknames = [];
   modelArr.forEach(player => {
     console.log(player);
     let playerJSONModel = JSON.parse(player);
@@ -284,7 +291,7 @@ const championSelectPresentation = modelArr => {
     cardContainer.appendChild(reportPlayer);
     container.appendChild(cardContainer);
 
-    nicknames.push(nickname)
+    nicknames.push(nickname);
   });
   if (container.classList.contains("hidden")) {
     container.classList.remove("hidden");
@@ -299,13 +306,22 @@ const championSelectPresentation = modelArr => {
   contentLabelButton.id = "share-button";
   contentLabelButton.innerText = "Copy link";
   contentLabelButton.onclick = () => {
-    if(nicknames.length>1){
-      clipboard.writeText("https://feedspot.gg/players?nicknames="+nicknames.join()+"&server="+loggedServerInt)
-    }else{
-      clipboard.writeText("https://feedspot.gg/player?nicknames="+nicknames.join()+"&server="+loggedServerInt)
-
+    if (nicknames.length > 1) {
+      clipboard.writeText(
+        "https://feedspot.gg/players?nicknames=" +
+          nicknames.join() +
+          "&server=" +
+          loggedServerInt
+      );
+    } else {
+      clipboard.writeText(
+        "https://feedspot.gg/player?nicknames=" +
+          nicknames.join() +
+          "&server=" +
+          loggedServerInt
+      );
     }
-  }
+  };
   contentLabelContent.innerHTML = "";
   contentLabelContent.appendChild(contentLabelShare);
   contentLabelContent.appendChild(contentLabelButton);
@@ -369,10 +385,57 @@ const deltaServerToInt = server => {
   }
 };
 
-
 ///reportedForm
-const getReportOpinionType = () => {
 
-}
+const submitReport = () => {
+  const getIP = require("external-ip")();
+  let CommentType = getReportOpinionType() ? 1 : 0;
+  let CreatedDate = Date.now();
+  let Description = reportedDescripton.value;
+  let ReportOwner = reportedYourName.value;
+  let Server = reportedServer.value;
+  let ReportedPlayer = reportedPlayerNick.value;
+  let IP;
+  getIP((err, ip) => {
+    if (err) {
+      alert("Error during fetching your configuration...");
+    } else {
+      IP = ip;
+      const jsonModel = {
+        CommentType,CreatedDate,Description,ReportOwner,Server,ReportedPlayer,IP
+      }
+      console.log(jsonModel);
+    }
+  });
+};
+
+const setReportOpinionType = type => {
+  if (reportedPositiveButton.classList.contains("selected-report-type")) {
+    reportedPositiveButton.classList.remove("selected-report-type");
+  }
+  if (reportedNegativeButton.classList.contains("selected-report-type")) {
+    reportedNegativeButton.classList.remove("selected-report-type");
+  }
+  switch (type) {
+    case true:
+      reportedPositiveButton.classList.add("selected-report-type");
+      break;
+    case false:
+      reportedNegativeButton.classList.add("selected-report-type");
+      break;
+  }
+};
+
+const getReportOpinionType = () => {
+  if (reportedPositiveButton.classList.contains("selected-report-type")) {
+    return true;
+  }
+
+  if (reportedNegativeButton.classList.contains("selected-report-type")) {
+    return false;
+  }
+
+  return undefined;
+};
 
 ///
