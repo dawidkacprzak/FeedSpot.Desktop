@@ -29,9 +29,11 @@ const CheckStatus = (endpoint, beforeText, failText) => {
     sleep(500).then(() => {
       MakeRequest(endpoint)
         .then(() => {
+          console.log("Resolver status")
           resolve(true);
         })
         .catch(e => {
+          console.log("fail status")
           statusLabel.innerText = failText;
           reject(false);
         });

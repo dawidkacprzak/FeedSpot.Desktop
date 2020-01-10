@@ -18,7 +18,7 @@ function createWindow() {
     },
     icon: path.join(__dirname, "content/images/icon.png")
   });
-  //loadingWin.webContents.openDevTools()
+  loadingWin.webContents.openDevTools()
 
   loadingWin.loadFile("./pages/Loading.html");
 }
@@ -58,8 +58,12 @@ ipcMain.on("app_version", event => {
 });
 
 ipcMain.on("update-check", event => {
-  autoUpdater.autoDownload = true;
-  autoUpdater.checkForUpdatesAndNotify();
+  if (process.env.STATE == "dev") {
+    loadingWin.webContents.send("update-not-available");
+  } else {
+    autoUpdater.autoDownload = true;
+    autoUpdater.checkForUpdatesAndNotify();
+  }
 });
 
 ipcMain.on("top-window", event => {
@@ -78,9 +82,11 @@ ipcMain.on("close", event => {
 });
 
 autoUpdater.on("update-not-available", data => {
+  console.log("there is no update")
   loadingWin.webContents.send("update-not-available");
 });
 
 autoUpdater.on("update-available", data => {
+  console.log("there is update")
   loadingWin.webContents.send("update-available");
 });

@@ -1,5 +1,5 @@
 const { ipcRenderer, ipcMain, clipboard } = require("electron");
-const Dialog = require('electron-dialog');
+const Dialog = require("electron-dialog");
 const LCUConnector = require("lcu-connector");
 const https = require("https");
 const swaggerUI = require("swagger-ui");
@@ -49,9 +49,8 @@ window.onload = () => {
   reportedPositiveButton = document.getElementById("report-data-positive");
   reportedNegativeButton = document.getElementById("report-data-negative");
   reportedDescripton = document.getElementById("report-data-description");
-  reportedYourName = document.getElementById("report-data-nickname"); 
+  reportedYourName = document.getElementById("report-data-nickname");
   reportedSubmitButton.onclick = () => submitReport();
-
   let buttons = document.getElementsByClassName("menu-button");
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].onclick = e => {
@@ -104,6 +103,9 @@ const makeDeltaRequestAndStartLobbyLoop = () => {
       try {
         loggedServer = delta.originalPlatformId;
         loggedServerInt = deltaServerToInt(loggedServer);
+        if (loggedServerInt != undefined && loggedServerInt != null) {
+          setReportServer(loggedServerInt);
+        }
         runCheckingLobbyLoop();
       } catch (e) {
         makeDeltaRequestAndStartLobbyLoop();
@@ -121,6 +123,9 @@ const runCheckingLobbyLoop = () => {
     LCURequest("GET", "/lol-champ-select/v1/session")
       .then(e => {
         if (!inLobby) {
+          if (loggedServerInt != undefined && loggedServerInt != null) {
+            setReportServer(loggedServerInt);
+          }
           leagueClientStatusLabel.innerText =
             "Fetching data from champion select";
           inLobby = true;
@@ -278,7 +283,10 @@ const championSelectPresentation = modelArr => {
     reportPlayer.classList.add("report-player-block");
     reportPlayer.classList.add("hover-button");
     reportPlayer.innerText = "Report player";
-    reportPlayer.onclick = () => {};
+    reportPlayer.onclick = () => {
+      setReportNickname(nickname);
+      ChangeMenuTab("menu-button-report");
+    };
 
     OpggLog.appendChild(opgg);
     OpggLog.appendChild(log);
@@ -405,20 +413,36 @@ const submitReport = () => {
     } else {
       IP = ip;
       const jsonModel = {
-        CommentType,CreatedDate,Description,ReportOwner,Server,ReportedPlayer,IP
-      }
-      const dialogOptions = {type: 'info', buttons: ['OK', 'Cancel'], message: 'Do it?'}
-      const { dialog } = require('electron')
- 
-       MakeRequest("AddReportToPlayer?simpleCommentJSONModel="+encodeURIComponent(JSON.stringify(jsonModel))).then((e)=>{
-         alert("Opinion has been added")
-       }).catch((e)=>{
-        Dialog.alert(e)
-       }).finally(()=>{
-        reportedSubmitButton.disabled = false;
-        reportedSubmitButton.innerText = "Submit opinion";
-       })
-      
+        CommentType,
+        CreatedDate,
+        Description,
+        ReportOwner,
+        Server,
+        ReportedPlayer,
+        IP
+      };
+      const dialogOptions = {
+        type: "info",
+        buttons: ["OK", "Cancel"],
+        message: "Do it?"
+      };
+      const { dialog } = require("electron");
+
+      MakeRequest(
+        "AddReportToPlayer?simpleCommentJSONModel=" +
+          encodeURIComponent(JSON.stringify(jsonModel))
+      )
+        .then(e => {
+          alert("Opinion has been added");
+        })
+        .catch(e => {
+          Dialog.alert(e);
+        })
+        .finally(() => {
+          reportedSubmitButton.disabled = false;
+          reportedSubmitButton.innerText = "Submit opinion";
+        });
+
       console.log(jsonModel);
     }
   });
@@ -440,6 +464,14 @@ const setReportOpinionType = type => {
       break;
   }
 };
+
+const setReportServer = serverId => {
+  reportedServer.value = serverId;
+};
+
+const setReportNickname = nickname => {
+  reportedPlayerNick.value = nickname;
+}
 
 const getReportOpinionType = () => {
   if (reportedPositiveButton.classList.contains("selected-report-type")) {
