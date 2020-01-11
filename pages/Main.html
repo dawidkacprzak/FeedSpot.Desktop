@@ -117,41 +117,141 @@
                 <button id="submit-opinion-button">Submit opinion</button>
               </div>
             </div>
-            <div id="current-players-container" class="content-box">
-                <div id="current-player-topbar">
-                  <div id="current-player-details">
-                    <img height="70" width="70" src="http://ddragon.leagueoflegends.com/cdn/10.1.1/img/profileicon/588.png" />
-                    <span id="current-player-nickname">Rekurencja</span>
-                    <span id="current-player-server">(EUNE)</span>
-
+            <div id="current-players-container" class="content-box hidden">
+              <div id="current-player-topbar">
+                <div id="current-player-details">
+                  <img
+                    height="70"
+                    width="70"
+                    src="http://ddragon.leagueoflegends.com/cdn/10.1.1/img/profileicon/588.png"
+                  />
+                  <span id="current-player-nickname">Rekurencja</span>
+                  <span id="current-player-server">(EUNE)</span>
+                </div>
+                <div class="current-player-input-serverchoose">
+                  <input type="text" id="current-player-data-reported" />
+                  <select id="current-player-data-server" defaultValue="EUNE">
+                    <option value="0">EUNE</option>
+                    <option value="1">EUW</option>
+                    <option value="4">NA</option>
+                    <option value="2">RU</option>
+                    <option value="3">TR</option>
+                  </select>
+                  <img
+                    height="15"
+                    width="15"
+                    src="../content/images/refresh.png"
+                  />
+                </div>
+              </div>
+              <div id="current-player-body">
+                <div
+                  id="current-player-simple-stats"
+                  class="current-player-body-element"
+                >
+                  <div class="current-player-header">
+                    Account stats
                   </div>
-                  <div class="current-player-input-serverchoose">
-                    <input type="text" id="current-player-data-reported" />
-                    <select id="current-player-data-server" defaultValue="EUNE">
-                      <option value="0">EUNE</option>
-                      <option value="1">EUW</option>
-                      <option value="4">NA</option>
-                      <option value="2">RU</option>
-                      <option value="3">TR</option>
-                    </select>
-                    <img height="15" width="15" src="../content/images/refresh.png" />
+                  <div id="current-player-simple-stats-content">
+                    <div class="current-player-simple-stats-item">
+                      Reputation factor: 10
+                    </div>
+                    <div class="current-player-simple-stats-item">
+                      Report count: 2
+                    </div>
+                    <div class="current-player-simple-stats-item">
+                      Positive percent: 20$
+                    </div>
+                    <div class="horizontal-button-container">
+                      <button class="current-player-social-button">
+                        FeedSpot
+                      </button>
+                      <button class="current-player-social-button">
+                        OP.GG
+                      </button>
+                      <button class="current-player-social-button">
+                        League of graphs
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div id="current-player-body">
-                 <div id="current-player-simple-stats" class="current-player-body-element">
-                    <div id="current-player-simple-stats-header">
-                      Account stats
-                    </div>
-                    <div id="current-player-simple-stats-content">
-                      <div class="current-player-simple-stats-item">
-                        Reputation: 10
+                <div
+                  id="current-player-simple-reports"
+                  class="current-player-body-element"
+                >
+                  <div class="current-player-header">
+                    Opinion list
+                  </div>
+                  <div id="current-player-reports">
+                    <div class="report-item-container">
+                      <div class="report-item-header">
+                        <span>20-10-2019 - req</span>
+                        <span>Negative</span>
+                      </div>
+                      <div class="report-item-description">
+                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        lorem ipsum
                       </div>
                     </div>
-                 </div>
-                 <div id="current-player-simple-reports" class="current-player-body-element">
-                   XD2
-                 </div>
+                    <div class="report-item-container">
+                      <div class="report-item-header">
+                        <span>20-10-2019 - req</span>
+                        <span>Negative</span>
+                      </div>
+                      <div class="report-item-description">
+                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        lorem ipsum
+                      </div>
+                    </div>
+                    <div class="report-item-container">
+                      <div class="report-item-header">
+                        <span>20-10-2019 - req</span>
+                        <span>Negative</span>
+                      </div>
+                      <div class="report-item-description">
+                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        lorem ipsum
+                      </div>
+                    </div>
+                    <div class="report-item-container">
+                      <div class="report-item-header">
+                        <span>20-10-2019 - req</span>
+                        <span>Negative</span>
+                      </div>
+                      <div class="report-item-description">
+                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        lorem ipsum
+                      </div>
+                    </div>
+                    <div class="report-item-container">
+                      <div class="report-item-header">
+                        <span>20-10-2019 - req</span>
+                        <span>Negative</span>
+                      </div>
+                      <div class="report-item-description">
+                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        lorem ipsum
+                      </div>
+                    </div>
+                    <div class="report-item-container">
+                      <div class="report-item-header">
+                        <span>20-10-2019 - req</span>
+                        <span>Negative</span>
+                      </div>
+                      <div class="report-item-description">
+                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        lorem ipsum
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
           </div>
 

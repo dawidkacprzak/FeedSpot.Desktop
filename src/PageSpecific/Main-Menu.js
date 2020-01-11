@@ -14,6 +14,9 @@ const ChangeMenuTab = senderId => {
       break;
     case "menu-button-account":
       clearContextMenu();
+      document
+      .getElementById("current-players-container")
+      .classList.remove("hidden");
       break;
     case "menu-button-website":
       opn("https://feedspot.gg")

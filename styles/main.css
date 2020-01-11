@@ -209,18 +209,7 @@ body {
   align-items: flex-start;
   flex-wrap: wrap;
 }
-::-webkit-scrollbar {
-  background: #0b0e14;
-  width: 19px;
-  border-radius: 10px;
-}
 
-::-webkit-scrollbar-thumb:window-inactive,
-::-webkit-scrollbar-thumb {
-  background: #171e2b;
-  border-radius: 10px;
-  border: 3px solid #0b0e14;
-}
 
 #menu {
   background-color: #00000050;
@@ -458,18 +447,17 @@ body {
   background-color: #DDDDDD;
 }
 
-#report-description::-webkit-scrollbar {
-  background: #0b0e14;
+::-webkit-scrollbar {
+  background: #121720;
   width: 10px;
   border-radius: 0 !important;
 
 }
 
-#report-description::-webkit-scrollbar-thumb:window-inactive,
-#report-description::-webkit-scrollbar-thumb {
-  background: #232e42;
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+  background: #19202e;
   border-radius: 0 !important;
-  border: 3px solid #0b0e14;
 }
 
 .horizontal-button-container
@@ -611,8 +599,8 @@ button:focus {
 }
 #current-players-container
 {
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: column;
   padding-right: 20px;
   padding-left: 20px;
   align-items: center;
@@ -635,7 +623,7 @@ button:focus {
   border-radius: 2px;
 }
 
-#current-player-simple-stats-header
+.current-player-header
 {
   font-weight: bold;
   margin-left: 10px;
@@ -645,6 +633,7 @@ button:focus {
   color:#CCCCCC;
   border-bottom: 1px solid #FFFFFF10;
   margin-right: 10px;
+  margin-bottom: 8px;
 }
 
 .current-player-simple-stats-item
@@ -656,5 +645,55 @@ button:focus {
   color:#CCCCCC;
   margin-right: 10px;
   background-color: #ffffff10;
-  border-radius: 2px;
+  margin-top: 2px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 10px;
+}
+
+.current-player-social-button
+{
+  background-color: #00000010 !important;
+  color: #DDDDDD !important;
+}
+
+#current-player-reports
+{
+  display: flex;
+  flex-direction: column;
+  max-height: 515px;
+  overflow:auto;
+}
+
+.report-item-container
+{
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF10;
+  padding: 10px;
+  margin-top: 2px;
+}
+
+.report-item-header
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #FFFFFF10;
+  height: 25px;
+}
+
+.report-item-header span
+{
+  font-size: 15px;
+  height: 30px;
+  color:#CCCCCC;
+}
+
+.report-item-description{
+  margin-top: 5px;
+}
+#current-player-simple-stats-content
+{
+  padding-top: 1px;
 }
