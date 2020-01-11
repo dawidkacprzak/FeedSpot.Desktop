@@ -1,3 +1,4 @@
+
 const ChangeMenuTab = senderId => {
   let correct = true;
   let selectedElement = document.getElementById(senderId);
@@ -5,27 +6,35 @@ const ChangeMenuTab = senderId => {
   switch (senderId) {
     case "menu-button-snipe":
       clearContextMenu();
+      showOrHideBottomLabel();
       document
         .getElementById("fetched-players-container")
         .classList.remove("hidden");
       break;
     case "menu-button-stats":
       clearContextMenu();
+      hideBottomLabel();
+
       break;
     case "menu-button-account":
       clearContextMenu();
+      hideBottomLabel();
+
       document
       .getElementById("current-players-container")
       .classList.remove("hidden");
       break;
     case "menu-button-website":
       opn("https://feedspot.gg")
+      correct = false;
       break;
     case "menu-button-bugs":
-      clearContextMenu();
+      Dialog.alert("If you found any bug or want to share your opinion with us feel free to mail us on dawidkacprzak@icloud.com ")
+      correct = false;
       break;
     case "menu-button-report":
       clearContextMenu();
+      hideBottomLabel();
       document
       .getElementById("report-player-container")
       .classList.remove("hidden");

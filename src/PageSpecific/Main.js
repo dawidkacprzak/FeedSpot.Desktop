@@ -18,7 +18,7 @@ let connectedToChampionSelect = false;
 let loggedServer;
 let loggedServerInt;
 let inLobby = false;
-
+let connectedToClient = false;
 //report form
 let reportedPlayerNick;
 let reportedServer;
@@ -28,6 +28,23 @@ let reportedPositiveButton;
 let reportedNegativeButton;
 let reportedSubmitButton;
 ///
+//account page
+let accountPageFetchData;
+let accountPageNicknameInput;
+let accountPageServerSelect;
+let accountPageLoadingOverlay;
+
+let accountPageReputation;
+let accountPageReportCount;
+let accountPagePositivePercent;
+let accountPageFeedSpotUrl;
+let accountPageOPGGUrl;
+let accountPageLOGUrl;
+let accountPageReportContainer;
+let accountPageIcon;
+let accountPageNick;
+let accountPageServer;
+//
 
 const connector = new LCUConnector();
 
@@ -50,7 +67,42 @@ window.onload = () => {
   reportedNegativeButton = document.getElementById("report-data-negative");
   reportedDescripton = document.getElementById("report-data-description");
   reportedYourName = document.getElementById("report-data-nickname");
+  accountPageFetchData = document.getElementById("fetch-account-button");
+  accountPageLoadingOverlay = document.getElementById("current-player-loading");
+  accountPageIcon = document.getElementById("current-player-icon")
+  accountPageNicknameInput = document.getElementById(
+    "current-player-data-reported"
+  );
+  accountPageServerSelect = document.getElementById(
+    "current-player-data-server"
+  );
+
+  accountPageNick = document.getElementById("current-player-nickname");
+  accountPageServer = document.getElementById("current-player-server");
+
+  accountPageReputation = document.getElementById("current-player-reputation");
+  accountPageReportCount = document.getElementById(
+    "current-player-reportcount"
+  );
+  accountPagePositivePercent = document.getElementById(
+    "current-player-positivepercent"
+  );
+  accountPageFeedSpotUrl = document.getElementById(
+    "current-player-feedspoturl"
+  );
+  accountPageOPGGUrl = document.getElementById("current-player-opggurl");
+  accountPageLOGUrl = document.getElementById("current-player-logurl");
+  accountPageReportContainer = document.getElementById(
+    "current-player-reports"
+  );
+
   reportedSubmitButton.onclick = () => submitReport();
+  accountPageFetchData.onclick = () => downloadModelForAccountPageFromInputs();
+  accountPageNicknameInput.onkeypress = (key) => {
+    if(key.keyCode === 13){
+      downloadModelForAccountPageFromInputs();
+    }
+  }
   let buttons = document.getElementsByClassName("menu-button");
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].onclick = e => {
@@ -68,9 +120,9 @@ window.onload = () => {
     ipcRenderer.send("close");
   };
 
-  sleep(1000).then(() => {
+  sleep(400).then(() => {
     connector.on("connect", data => {
-      console.log("connected");
+      connectedToClient = true;
       leagueClientStatusLabel.innerText = "Connected to league client";
       LCUData = data;
       const { username, password, address, port } = LCUData;
@@ -81,20 +133,25 @@ window.onload = () => {
 
     connector.on("disconnect", data => {
       try {
+        connectedToClient = false;
         leagueClientStatusLabel.innerText = "Disconnected from league client";
         clearInterval(checkingLobbyInterval);
         inLobby = false;
         connectedToChampionSelect = false;
 
-        if (contentLabel.classList.contains("hidden")) {
-          contentLabel.classList.remove("hidden");
-        }
+        showOrHideBottomLabel();
       } catch (ex) {
         console.log(ex);
       }
     });
     connector.start();
   });
+
+  sleep(1500).then(()=>{
+    if(connectedToClient != true){
+      downloadModelForAccountPage("Rekurencja",'0')
+    }
+  })
 };
 
 const makeDeltaRequestAndStartLobbyLoop = () => {
@@ -110,6 +167,8 @@ const makeDeltaRequestAndStartLobbyLoop = () => {
         LCURequest("GET", "/lol-summoner/v1/current-summoner")
           .then(currentSummoner => {
             setYourReportNickname(currentSummoner.displayName);
+            downloadModelForAccountPage(currentSummoner.displayName,loggedServerInt.toString())
+
           })
           .catch(er => {})
           .finally(() => {
@@ -343,9 +402,8 @@ const championSelectPresentation = modelArr => {
   contentLabelContent.appendChild(contentLabelShare);
   contentLabelContent.appendChild(contentLabelButton);
 
-  if (contentLabel.classList.contains("hidden")) {
-    contentLabel.classList.remove("hidden");
-  }
+  showOrHideBottomLabel();
+
   ipcRenderer.send("top-window");
   document.getElementById("menu-button-snipe").click();
   leagueClientStatusLabel.innerText = "Connected to league client";
@@ -429,19 +487,12 @@ const submitReport = () => {
         ReportedPlayer,
         IP
       };
-      const dialogOptions = {
-        type: "info",
-        buttons: ["OK", "Cancel"],
-        message: "Do it?"
-      };
-      const { dialog } = require("electron");
-
       MakeRequest(
         "AddReportToPlayer?simpleCommentJSONModel=" +
           encodeURIComponent(JSON.stringify(jsonModel))
       )
         .then(e => {
-          alert("Opinion has been added");
+          Dialog.alert("Opinion has been added");
         })
         .catch(e => {
           Dialog.alert(e);
@@ -505,11 +556,155 @@ const MakeRequest = endpoint => {
     console.log(url);
     axios
       .get(url)
-      .then(() => {
-        resolve(true);
+      .then(e => {
+        resolve(e);
       })
       .catch(ex => {
         reject(ex.response.data);
       });
   });
+};
+
+const showOrHideBottomLabel = () => {
+  if (inLobby) {
+    if (contentLabel.classList.contains("hidden")) {
+      contentLabel.classList.remove("hidden");
+    }
+  } else {
+    if (!contentLabel.classList.contains("hidden")) {
+      contentLabel.classList.add("hidden");
+    }
+  }
+};
+
+const hideBottomLabel = () => {
+  if (!contentLabel.classList.contains("hidden")) {
+    contentLabel.classList.add("hidden");
+  }
+};
+
+let enabledAccountPageButton = true;
+const downloadModelForAccountPageFromInputs = () => {
+  downloadModelForAccountPage(
+    accountPageNicknameInput.value,
+    accountPageServerSelect.value
+  );
+};
+
+const downloadModelForAccountPage = (nickname, server) => {
+  console.log("down: "+nickname + " " + server)
+  if (enabledAccountPageButton) {
+    enabledAccountPageButton = false;
+    if (nickname == "") {
+      enabledAccountPageButton = true;
+    } else {
+      if (accountPageLoadingOverlay.classList.contains("hidden")) {
+        accountPageLoadingOverlay.classList.remove("hidden");
+      }
+      MakeRequest(
+        "GetPlayerModel?nickname=" +
+          encodeURIComponent(nickname) +
+          "&server=" +
+          server
+      )
+        .then(e => {
+          let res = e.data;
+          let reputation = res.Reputation;
+          let commentCount = res.CommentCount;
+          let opggurl = res.OPGGUrl;
+          let logurl = res.LOGUrl;
+          let count = 0;
+          let negativeCount = 0;
+          let positiveCount = 0;
+          let feedspoturl =
+            "https://feedspot.gg/player?nicknames=" +
+            nickname +
+            "&server=" +
+            server;
+          let profileIconId = res.PlayerBasic.RiotModel.profileIconId;
+          let profileiconurl = "http://ddragon.leagueoflegends.com/cdn/10.1.1/img/profileicon/"+profileIconId+".png"
+          accountPageIcon.src = profileiconurl;
+          accountPageReportContainer.innerHTML = "";
+          accountPageNick.innerText = nickname;
+          accountPageServer.innerText = "(" +getHumanServerNameFromInt(server) + ")";
+          res.PlayerComments.forEach(element => {
+            count++;
+            if (element.CommentType == "0") {
+              negativeCount++;
+            } else {
+              positiveCount++;
+            }
+
+            let reportItemContainer = document.createElement("div");
+            reportItemContainer.classList.add("report-item-container");
+
+            let reportItemHeader = document.createElement("div");
+            reportItemHeader.classList.add("report-item-header");
+
+            let dateReportOwnerSpan = document.createElement("span");
+            var date = new Date(element.CreatedDate);
+            dateReportOwnerSpan.innerText =
+              element.ReportOwner + " - " + date.toLocaleDateString();
+
+            let reportType = document.createElement("span");
+            reportType.innerText =
+              element.CommentType == 0 ? "Negative" : "Positive";
+
+            let reportDescription = document.createElement("div");
+            reportDescription.classList.add("report-item-description");
+            reportDescription.innerText = element.Description;
+
+            reportItemHeader.appendChild(dateReportOwnerSpan);
+            reportItemHeader.appendChild(reportType);
+
+            reportItemContainer.appendChild(reportItemHeader);
+            reportItemContainer.appendChild(reportDescription);
+            accountPageReportContainer.appendChild(reportItemContainer);
+          });
+
+          if (res.PlayerComments.length == 0) {
+            accountPageReportContainer.innerText = "There is no comments";
+          }
+          percentPositiveValue = Math.round(
+            ((positiveCount / count) * 100) / 1
+          );
+
+          if (count == 0) percentPositiveValue = 0;
+          accountPageReputation.innerText = "Reputation factor: " + reputation;
+          accountPageReportCount.innerText = "Report count: " + commentCount;
+          accountPagePositivePercent.innerText =
+            "Positive percent: " + percentPositiveValue + "%";
+          accountPageFeedSpotUrl.onclick = () => opn(feedspoturl);
+          accountPageOPGGUrl.onclick = () => opn(opggurl);
+          accountPageLOGUrl.onclick = () => opn(logurl);
+        })
+        .catch(e => {
+          console.log(e);
+          Dialog.alert("Cannot find specified player");
+        })
+        .finally(() => {
+          reportedSubmitButton.disabled = false;
+          reportedSubmitButton.innerText = "Submit opinion";
+          enabledAccountPageButton = true;
+          if (!accountPageLoadingOverlay.classList.contains("hidden")) {
+            accountPageLoadingOverlay.classList.add("hidden");
+          }
+        });
+    }
+  }
+};
+
+const getHumanServerNameFromInt = index => {
+  switch (index) {
+    case "0":
+      return "EUNE";
+    case "1":
+      return "EUW";
+    case "2":
+      return "RU";
+    case "3":
+      return "TR";
+    case "4":
+      return "NA";
+  }
 };

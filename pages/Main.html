@@ -31,7 +31,7 @@
       </div>
       <div id="content">
         <div id="menu">
-          <div id="menu-button-snipe" class="menu-button selected-menu">
+          <div id="menu-button-snipe" class="menu-button">
             <img src="../content/images/snipe.png" />
             <span>Spotting</span>
           </div>
@@ -43,7 +43,7 @@
           <img src="../content/images/stats.png" />
           <span>Stats</span>
         </div>  -->
-          <div id="menu-button-account" class="menu-button">
+          <div id="menu-button-account" class="menu-button selected-menu">
             <img src="../content/images/star.png" />
             <span>Account</span>
           </div>
@@ -117,16 +117,20 @@
                 <button id="submit-opinion-button">Submit opinion</button>
               </div>
             </div>
-            <div id="current-players-container" class="content-box hidden">
+            <div id="current-players-container" class="content-box">
+              <div id="current-player-loading" class="">
+                <div class="lds-dual-ring"></div>
+                <p>Loading</p>
+              </div>
               <div id="current-player-topbar">
                 <div id="current-player-details">
                   <img
                     height="70"
                     width="70"
-                    src="http://ddragon.leagueoflegends.com/cdn/10.1.1/img/profileicon/588.png"
+                    id="current-player-icon"
                   />
-                  <span id="current-player-nickname">Rekurencja</span>
-                  <span id="current-player-server">(EUNE)</span>
+                  <span id="current-player-nickname"></span>
+                  <span id="current-player-server"></span>
                 </div>
                 <div class="current-player-input-serverchoose">
                   <input type="text" id="current-player-data-reported" />
@@ -138,6 +142,7 @@
                     <option value="3">TR</option>
                   </select>
                   <img
+                    id="fetch-account-button"
                     height="15"
                     width="15"
                     src="../content/images/refresh.png"
@@ -153,23 +158,20 @@
                     Account stats
                   </div>
                   <div id="current-player-simple-stats-content">
-                    <div class="current-player-simple-stats-item">
-                      Reputation factor: 10
+                    <div class="current-player-simple-stats-item" id="current-player-reputation">
                     </div>
-                    <div class="current-player-simple-stats-item">
-                      Report count: 2
+                    <div class="current-player-simple-stats-item" id="current-player-reportcount">
                     </div>
-                    <div class="current-player-simple-stats-item">
-                      Positive percent: 20$
+                    <div class="current-player-simple-stats-item" id="current-player-positivepercent">
                     </div>
                     <div class="horizontal-button-container">
-                      <button class="current-player-social-button">
+                      <button class="current-player-social-button" id="current-player-feedspoturl">
                         FeedSpot
                       </button>
-                      <button class="current-player-social-button">
+                      <button class="current-player-social-button" id="current-player-opggurl">
                         OP.GG
                       </button>
-                      <button class="current-player-social-button">
+                      <button class="current-player-social-button" id="current-player-logurl">
                         League of graphs
                       </button>
                     </div>
@@ -183,72 +185,6 @@
                     Opinion list
                   </div>
                   <div id="current-player-reports">
-                    <div class="report-item-container">
-                      <div class="report-item-header">
-                        <span>20-10-2019 - req</span>
-                        <span>Negative</span>
-                      </div>
-                      <div class="report-item-description">
-                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                        lorem ipsum
-                      </div>
-                    </div>
-                    <div class="report-item-container">
-                      <div class="report-item-header">
-                        <span>20-10-2019 - req</span>
-                        <span>Negative</span>
-                      </div>
-                      <div class="report-item-description">
-                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                        lorem ipsum
-                      </div>
-                    </div>
-                    <div class="report-item-container">
-                      <div class="report-item-header">
-                        <span>20-10-2019 - req</span>
-                        <span>Negative</span>
-                      </div>
-                      <div class="report-item-description">
-                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                        lorem ipsum
-                      </div>
-                    </div>
-                    <div class="report-item-container">
-                      <div class="report-item-header">
-                        <span>20-10-2019 - req</span>
-                        <span>Negative</span>
-                      </div>
-                      <div class="report-item-description">
-                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                        lorem ipsum
-                      </div>
-                    </div>
-                    <div class="report-item-container">
-                      <div class="report-item-header">
-                        <span>20-10-2019 - req</span>
-                        <span>Negative</span>
-                      </div>
-                      <div class="report-item-description">
-                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                        lorem ipsum
-                      </div>
-                    </div>
-                    <div class="report-item-container">
-                      <div class="report-item-header">
-                        <span>20-10-2019 - req</span>
-                        <span>Negative</span>
-                      </div>
-                      <div class="report-item-description">
-                        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                        ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                        lorem ipsum
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
