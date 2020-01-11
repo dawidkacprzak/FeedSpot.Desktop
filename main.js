@@ -18,7 +18,7 @@ function createWindow() {
     },
     icon: path.join(__dirname, "content/images/icon.png")
   });
-  loadingWin.webContents.openDevTools()
+ // loadingWin.webContents.openDevTools()
 
   loadingWin.loadFile("./pages/Loading.html");
 }
@@ -41,7 +41,7 @@ ipcMain.on("loading_finished", event => {
     },
     icon: path.join(__dirname, "content/images/icon.png")
   });
-  mainWin.webContents.openDevTools()
+  //mainWin.webContents.openDevTools()
   mainWin.removeMenu();
 
   mainWin.loadFile("./pages/Main.html");
