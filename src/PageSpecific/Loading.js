@@ -66,7 +66,7 @@ window.onload = () => {
 
 
 ipcRenderer.on("update-available", () => {
-    statusLabel.innerText = "Update is downloading in background!";
+    statusLabel.innerText = "Updating in background";
     sleep(1000).then((e)=>{
       ipcRenderer.send("loading_finished");
     })

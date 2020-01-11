@@ -1,22 +1,28 @@
 const ChangeMenuTab = senderId => {
   let correct = true;
   let selectedElement = document.getElementById(senderId);
-  clearContextMenu();
+
   switch (senderId) {
     case "menu-button-snipe":
+      clearContextMenu();
       document
         .getElementById("fetched-players-container")
         .classList.remove("hidden");
       break;
     case "menu-button-stats":
+      clearContextMenu();
       break;
     case "menu-button-account":
+      clearContextMenu();
       break;
     case "menu-button-website":
+      opn("https://feedspot.gg")
       break;
     case "menu-button-bugs":
+      clearContextMenu();
       break;
     case "menu-button-report":
+      clearContextMenu();
       document
       .getElementById("report-player-container")
       .classList.remove("hidden");

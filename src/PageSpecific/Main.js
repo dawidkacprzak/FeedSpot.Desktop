@@ -101,12 +101,20 @@ const makeDeltaRequestAndStartLobbyLoop = () => {
   LCURequest("GET", "/lol-acs/v1/delta")
     .then(delta => {
       try {
+        console.log(delta);
         loggedServer = delta.originalPlatformId;
         loggedServerInt = deltaServerToInt(loggedServer);
         if (loggedServerInt != undefined && loggedServerInt != null) {
           setReportServer(loggedServerInt);
         }
-        runCheckingLobbyLoop();
+        LCURequest("GET", "/lol-summoner/v1/current-summoner")
+          .then(currentSummoner => {
+            setYourReportNickname(currentSummoner.displayName);
+          })
+          .catch(er => {})
+          .finally(() => {
+            runCheckingLobbyLoop();
+          });
       } catch (e) {
         makeDeltaRequestAndStartLobbyLoop();
       }
@@ -471,7 +479,11 @@ const setReportServer = serverId => {
 
 const setReportNickname = nickname => {
   reportedPlayerNick.value = nickname;
-}
+};
+
+const setYourReportNickname = nickname => {
+  reportedYourName.value = nickname;
+};
 
 const getReportOpinionType = () => {
   if (reportedPositiveButton.classList.contains("selected-report-type")) {

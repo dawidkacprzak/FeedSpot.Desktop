@@ -1,11 +1,11 @@
 {
   "name": "FeedSpot",
-  "version": "1.0.20",
+  "version": "1.0.22",
   "description": "Desktop version of FeedSpot.gg ",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "STATE=dev electron .",
+    "dev": "cross-env STATE=dev electron .",
     "build": "electron-builder build --win --publish never",
     "deploy": "electron-builder build --win --publish always"
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/capthapl/FeedSpot.Desktop#readme",
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "electron": "^6.1.7"
   },
   "dependencies": {
