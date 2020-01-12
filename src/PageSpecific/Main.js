@@ -321,13 +321,10 @@ const championSelectPresentation = modelArr => {
     openOnWeb.classList.add("fetched-social-block");
     openOnWeb.innerText = "Open profile";
     openOnWeb.classList.add("hover-button");
-    openOnWeb.onclick = () =>
-      opn(
-        "https://feedspot.gg/player?nicknames=" +
-          nickname +
-          "&server=" +
-          loggedServerInt
-      );
+    openOnWeb.onclick = () =>{
+      downloadModelForAccountPage(nickname,loggedServerInt.toString());
+      ChangeMenuTab("menu-button-account");
+    }
 
     let OpggLog = document.createElement("div");
     OpggLog.classList.add("same-size-container");
