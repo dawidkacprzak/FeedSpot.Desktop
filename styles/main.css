@@ -738,3 +738,8 @@ button:focus {
 {
   padding-right: 50px;
 }
+
+::placeholder
+{
+  
+}
