@@ -63,7 +63,7 @@
                 <span>You must be in champion select to use this tab</span>
               </div>
             </div>
-            <div id="report-player-container" class="content-box hidden">
+            <div id="report-player-container" class="content-box">
               <div id="report-player-notification-label">
                 Thank you for your cooperation in making league of legends
                 community even better!<br />
@@ -71,9 +71,7 @@
                 <br />~FeedSpot.gg team
               </div>
               <div id="report-form">
-                <br />
-                <p>Fill form to submit you opinion</p>
-                <br />
+                <p>Submit your opinion</p>
                 <div class="report-input-container">
                   <span>Reported player</span>
                   <div class="report-input-serverchoose">
@@ -88,36 +86,36 @@
                   </div>
                 </div>
                 <div class="report-input-container">
-                  <span>Description</span>
-                  <textarea id="report-data-description" placeholder=" optional"></textarea>
-                </div>
-                <div class="report-input-container">
                   <span>Opinion type</span>
-                  <div class="horizontal-button-container">
+                  <div class="vertical-button-container">
+                    <button
+                    onclick="setReportOpinionType(false)"
+                    id="report-data-negative"
+                    class="selected-report-type"
+                  >
+                    Negative
+                  </button>
                     <button
                       onclick="setReportOpinionType(true)"
                       id="report-data-positive"
                     >
                       Positive
                     </button>
-                    <button
-                      onclick="setReportOpinionType(false)"
-                      id="report-data-negative"
-                      class="selected-report-type"
-                    >
-                      Negative
-                    </button>
                   </div>
                 </div>
                 <div class="report-input-container">
+                  <span>Description</span>
+                  <textarea id="report-data-description" placeholder=" optional"></textarea>
+                </div>
+                <div class="report-input-container">
                   <span>Your name</span>
-                  <input id="report-data-nickname" type="text" />
+                  <input value="Anonymous" id="report-data-nickname" type="text" />
                 </div>
 
                 <button id="submit-opinion-button">Submit opinion</button>
               </div>
             </div>
-            <div id="current-players-container" class="content-box">
+            <div id="current-players-container" class="content-box hidden">
               <div id="current-player-loading" class="">
                 <div class="lds-dual-ring"></div>
                 <p>Loading</p>
