@@ -332,17 +332,17 @@ body {
 #report-player-notification-label
 {
   padding: 5px;
+  margin-top: 10px;
   padding-left: 0px;
   padding-right: 0px;
   text-align: center;
   width: 100%;
-  background-color: #80808010;
-  height: 60px;
-  -webkit-box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.75);
-  box-shadow: 0px 2px 5px -1px rgba(0,0,0,0.75);  font-size: 15px;
 }
 
+#report-player-notification-label strong
+{
+  color: #EEEEEE;
+}
 #report-player-container
 {
   display: flex;
@@ -357,7 +357,7 @@ body {
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 300px;
+  width: 400px;
   margin-bottom: 20px;
 }
 
@@ -384,7 +384,7 @@ body {
   display: flex;
   flex-direction: row;
   text-align: left;
-  width: 300px;
+  width: 400px;
   justify-content: center;
   align-items: center;
   border-radius: 2px;
@@ -424,13 +424,9 @@ body {
 
 #report-form
 {
-  background-color: #ffffff03;
-  border-left: 2px solid #00000010;
-  border-right: 2px solid #00000010;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  border-radius: 5px;
 }
 
 #report-form span
